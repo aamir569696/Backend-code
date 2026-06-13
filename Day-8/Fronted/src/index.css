@@ -1,24 +1,111 @@
-*{
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body,html,:root{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.856);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: white;
-}
-.notes{
+/* Form */
+.form-notes {
+  width: 400px;
+  margin: 40px auto;
   display: flex;
-  gap: 1rem;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-.note{
-  background-color: rgb(78, 77, 77);
-  padding: 1rem;
-  width: fit-content;
 
+.form-notes input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-notes input:focus {
+  border-color: #4a90e2;
+}
+
+.form-notes button {
+  padding: 10px;
+  background: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-notes button:hover {
+  background: #357abd;
+}
+
+/* Notes container */
+.notes {
+  width: 80%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+/* Single note card */
+.note {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.note:hover {
+  transform: translateY(-5px);
+}
+
+/* Text */
+.note h1 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.note p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Buttons */
+.deletebtn {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: none;
+  background: #e74c3c;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.deletebtn:hover {
+  background: #c0392b;
+}
+
+.updatebtn {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: none;
+  background: #2ecc71;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.updatebtn:hover {
+  background: #27ae60;
 }
