@@ -48,7 +48,7 @@ const bcryptjs=require("bcryptjs")
 
 async function loginController(req,res){
     const {email,password,username}=req.body;
-
+ console.log(req.body); 
     const user=await userModel.findOne({
         $or:[
             {username:username},
