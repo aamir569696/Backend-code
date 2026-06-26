@@ -1,5 +1,5 @@
 const userMOdel = require("../modle/user.modle");
-const crypto = require("crypto");
+const bcryptjs=require('bcryptjs')
 const jwt=require("jsonwebtoken")
 
 async function registerController(req, res){
@@ -17,7 +17,7 @@ async function registerController(req, res){
     });
   }
 
-  const hash = crypto.createHash("sha256").update(password).digest("hex");
+  const hash =await bcryptjs.hash(password,10)
   const user = await userMOdel.create({
     username,
     password: hash,
@@ -45,7 +45,6 @@ async function registerController(req, res){
 
 }
 
-
 async function loginController(req,res){
   const {username,password,email}=req.body;
 
@@ -62,11 +61,7 @@ $or:[
     })
    }
 
-   const hash=crypto.createHash('sha256').update(password).digest('hex')
-
-    const ispasswordValid= hash == user.password
-
-
+    const ispasswordValid=await bcryptjs.compare(password,user.password)
     const token =jwt.sign({
       id:user._id
     },process.env.JWT_SECRET,{expiresIn:'2d'})
