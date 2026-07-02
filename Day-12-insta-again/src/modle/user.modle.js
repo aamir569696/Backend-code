@@ -22,7 +22,7 @@ const userSchema=new mongoose.Schema({
     }
 })
 
-const userMOdel= mongoose.model("users_insta",userSchema)
+const userModel= mongoose.model("users_insta",userSchema)
 
 
-module.exports=userMOdel
+module.exports=userModel

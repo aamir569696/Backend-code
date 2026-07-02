@@ -27,7 +27,7 @@ async function registerController(req, res){
   });
 
   const token=jwt.sign({
-    id:user._id
+    id:user._id,username:user.username
   },process.env.JWT_SECRET, {expiresIn:"2d"})
 
   res.cookie("token",token)
@@ -63,7 +63,9 @@ $or:[
 
     const ispasswordValid=await bcryptjs.compare(password,user.password)
     const token =jwt.sign({
-      id:user._id
+      id:user._id,
+      username:user.username
+
     },process.env.JWT_SECRET,{expiresIn:'2d'})
 
     res.cookie('token',token)
