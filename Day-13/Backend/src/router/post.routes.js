@@ -7,11 +7,12 @@ const identifyUser=require("../midlewares/auth.midlewares")
 
 postRouter.post('/',upload.single('image'),identifyUser,postController.createPostController)
 
-// get api
-
 postRouter.get('/',identifyUser, postController.getPostController)
 
 postRouter.get('/detail/:postId' ,identifyUser, postController.getPostDetail)
+
+postRouter.get('/feed',identifyUser,postController.getFeedController)
+
 
 
 module.exports=postRouter

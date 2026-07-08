@@ -11,7 +11,7 @@ const imagekit = new ImageKit({
 async function createPostController(req, res) {
   console.log(req.body, req.file);
 
-  console.log(decoded);
+  //console.log(decoded);
 
   const file = await imagekit.files.upload({
     file: await toFile(Buffer.from(req.file.buffer), "file"),
@@ -29,7 +29,6 @@ async function createPostController(req, res) {
 }
 
 async function getPostController(req, res) {
-
   // const token = req.cookies.token;
   // let decoded;
   // try {
@@ -52,37 +51,44 @@ async function getPostController(req, res) {
 }
 
 async function getPostDetail(req, res) {
+  let userId = req.user.id;
+  let postId = req.params.postId;
 
-  
-  let userId=req.user.id
-  let postId=req.params.postId 
+  let post = await postModel.findById(postId);
 
-  let post=await postModel.findById(postId)
-
-  if(!post){
+  if (!post) {
     return res.status(404).json({
-      message:'post not found'
-    })
+      message: "post not found",
+    });
   }
 
-  const isValiduser=post.user.toString()===userId
+  const isValiduser = post.user.toString() === userId;
 
-  if(!isValiduser){
+  if (!isValiduser) {
     return res.status(403).json({
-      message:'forbidden content'
-    })
+      message: "forbidden content",
+    });
   }
 
-res.status(200).json({
-  message:'post fetched succesfully.',
-  post
-})
+  res.status(200).json({
+    message: "post fetched succesfully.",
+    post,
+  });
+}
 
+async function getFeedController(req, res) {
 
+  const posts =await postModel.find().populate('user')
+
+  res.status(200).json({
+    message: "post Get successfully",
+    posts
+  });
 }
 
 module.exports = {
   createPostController,
   getPostController,
-  getPostDetail
+  getPostDetail,
+  getFeedController,
 };
