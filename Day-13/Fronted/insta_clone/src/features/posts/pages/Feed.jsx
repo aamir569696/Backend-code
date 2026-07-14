@@ -33,9 +33,7 @@ const Feed = () => {
                key={post.id || post._id}
                 user={post.user}
                 post={post}
-              
-              
-              />
+               />
             );
           })}
         </div>
