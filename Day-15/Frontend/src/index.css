@@ -4,3 +4,12 @@ body,html{
   background-color: rgb(83, 81, 81);
   overflow: hidden;
 }
+.expression-btn{
+  width: 150px;
+  height: 40px;
+  border: none;
+  background-color: royalblue;
+  color: aliceblue;
+  border-radius: 10px;
+  cursor: pointer;
+}
