@@ -7,5 +7,9 @@ app.use(cookieParser())
 
 app.use('/api/auth',AuthRoute)
 
+// app.use('/api/auth',AuthRoute)
+
+// app.use('/api/auth',AuthRoute)
+
 
 module.exports=app
