@@ -108,7 +108,7 @@ async function logoutController(req,res) {
   token
  })
  res.status(200).json({
-  message:"user logout succesfully."
+  message:"user logout succesfully. and tokan is blacklisted"
  })
 
 }
