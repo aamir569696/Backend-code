@@ -2,6 +2,8 @@ const userModle = require("../modle/User.modle");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const blacklistModle=require("../modle/blacklist.modle")
+const redis=require('../config/cache');
+const { connect } = require("mongoose");
 
 async function registerController(req, res) {
   const { username, email, password } = req.body;
@@ -104,9 +106,8 @@ async function logoutController(req,res) {
  const token= req.cookies.token
  res.clearCookie('token')
 
- await blacklistModle.create({
-  token
- })
+ await redis.set(token, Date.now().toString())
+ 
  res.status(200).json({
   message:"user logout succesfully. and tokan is blacklisted"
  })

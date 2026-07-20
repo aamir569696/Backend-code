@@ -1,5 +1,6 @@
 const userModle = require("../modle/User.modle");
 const jwt = require("jsonwebtoken");
+const radis=require('../config/cache')
 
 async function authUser(req, res, next) {
   const token = req.cookies?.token;
@@ -9,6 +10,18 @@ async function authUser(req, res, next) {
       message: "token not provided",
     });
   }
+
+  const isTokenBlacklisted=await redis.get(token)
+
+  if(isTokenBlacklisted){
+    return res.status(401).json({
+      message:'invalid token'
+    })
+  }
+
+
+
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SCRET);
     req.user = decoded;
