@@ -1,0 +1,22 @@
+import { log } from "console";
+import app from "./src/app.js";
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+const httpServer = createServer(app);
+const io = new Server(httpServer, { /* options */ });
+
+io.on("connection", (socket) => {
+  console.log('new connection created');
+
+  socket.on('message',()=>{
+    console.log('user fire message event')
+  })
+  
+});
+
+
+httpServer.listen(3000,()=>{
+    console.log('server is runinig on port 3000');
+    
+})
